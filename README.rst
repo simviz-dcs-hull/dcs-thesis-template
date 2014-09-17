@@ -11,7 +11,7 @@ dcs08961 README
 Introduction
 ============
 
-``thesis-template`` provides a _LaTeX-based template for writing a BSc/MSc/PhD thesis at the Department of Cumputer Science, Unisverity of Hull.
+``thesis-template`` provides template(s) for writing a BSc/MSc/PhD thesis at the Department of Cumputer Science, Unisverity of Hull using the _LaTeX document preparation system.
 
 Building and Installation
 =========================
