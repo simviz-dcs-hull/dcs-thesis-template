@@ -11,7 +11,7 @@ dcs-thesis-template README
 Introduction
 ============
 
-``dcs-thesis-template`` provides `LaTeX`_-based template(s) for writing a BSc/MSc/MPhil/PhD disserations/theses at the Department of Computer Science, University of Hull.
+``dcs-thesis-template`` provides `LaTeX`_-based template(s) for writing a BSc/MSc/MPhil/PhD dissertations/theses at the Department of Computer Science, University of Hull.
 
 Building and Installation
 =========================
