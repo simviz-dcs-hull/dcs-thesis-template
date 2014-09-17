@@ -2,36 +2,42 @@
 
 \def\fileversion{v0.9}
 \def\filedate{2014/09/17}
+\def\filename{uhull_dcs_thesis}
 
-\ProvidesClass{uhull_dcs_thesis}[\filedate\space\fileversion\space dcs.uhull.ac.uk thesis class]
+\ProvidesClass{\filename}[\filedate\space\fileversion\space dcs.uhull.ac.uk thesis class]
 
 \newcommand\@degree{{\ttfamily\bfseries DEGREE}}
 \newcommand\@thesis{{\ttfamily\bfseries THESIS}}
-
+\newcommand\@profession{{\ttfamily\bfseries PROFESSION}}
 
 \DeclareOption{phd}{%
-  \renewcommand\@degree{{Doctor of Philosophy (PhD)}}
-  \renewcommand\@thesis{{thesis}}
+  \renewcommand{\@degree}{{Doctor of Philosophy}}
+  \renewcommand{\@thesis}{{thesis}}
 }
 \DeclareOption{mphil}{%
-  \renewcommand\@degree{{Master of Philosophy (MPhil)}}
-  \renewcommand\@thesis{{thesis}}
+  \renewcommand{\@degree}{{Master of Philosophy}}
+  \renewcommand{\@thesis}{{thesis}}
 }
 \DeclareOption{msc}{%
-  \renewcommand\@degree{{Master of Science (MSc)}}
-  \renewcommand\@thesis{{thesis}}
+  \renewcommand{\@degree}{{Master of Science}}
+  \renewcommand{\@thesis}{{dissertation}}
 }
 \DeclareOption{bsc}{%
-  \renewcommand\@degree{{Bachelor of Science (BSc)}}
-  \renewcommand\@thesis{{thesis}}
+  \renewcommand{\@degree}{{Bachelor of Science}}
+  \renewcommand{\@thesis}{{dissertation}}
+}
+\DeclareOption{ceng}{%
+  \renewcommand{\@profession}{Computer Engineering}
+}
+\DeclareOption{csci}{%
+  \renewcommand{\@profession}{Computer Science}
 }
 
 \DeclareOption{twocolumn}{%
-  \ClassError{uhull_dcs_thesis}{Option 'twocolumn' not supported for BUW theses.}{}
+  \ClassError{\filename}{Option 'twocolumn' not supported for \filename.}{}
 }
-
 \DeclareOption{notitlepage}{%
-  \ClassError{uhull_dcs_thesis}{Option 'notitlepage' not supported for BUW theses.}{}
+  \ClassError{\filename}{Option 'notitlepage' not supported for \filename.}{}
 }
 
 %% internal review
@@ -62,23 +68,21 @@
 \DeclareOption{print}{%
   \@printmodetrue
   \PassOptionsToClass{%
-    10pt,
-    BCOR5mm,
+    11pt,
+    BCOR=10mm,
     DIV=calc,
-    a5paper,
+    a4paper,
     twoside,
-    version=first,
   }{scrbook}
 }
 \DeclareOption{online}{%
   \@printmodefalse
   \PassOptionsToClass{%
     12pt,
-    BCOR0mm,
+    BCOR=0mm,
     DIV=classic,
     a4paper,
     oneside,
-    version=first,
   }{scrbook}
 }
 
@@ -92,13 +96,11 @@
   index=totoc,
   listof=totoc,
   numbers=noenddot,
-  openbib,
   toc=graduated,
-  version=first,
 }{scrbook}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
-\ExecuteOptions{bsc}
+\ExecuteOptions{bsc,csci}
 \ProcessOptions
 \LoadClass{scrbook}
 
@@ -123,7 +125,7 @@
     \addtolength{\topmargin}{-.2\topmargin}
     \addtolength{\textheight}{4\baselineskip}
   }
-  \PackageInfo{uhull_dcs_thesis}{%
+  \PackageInfo{\filename}{%
           \space\string\parindent\space=\space\the\parindent\MessageBreak
 \space\space\space\string\parskip\space=\space\the\parskip\MessageBreak
           \space\string\topmargin\space=\space\the\topmargin\MessageBreak
@@ -136,7 +138,7 @@
 \renewcommand{\pnumfont}{\normalfont\sffamily}
 
 %% headings/footings
-\defpagestyle{buwthesisheadings}{%
+\defpagestyle{thesisheadings}{%
   % header
   % (\textwidth+10mm,.1mm)
   {\pagemark\hfill\headmark}{\headmark\hfill\pagemark} % 2side, {l}{r}
@@ -149,14 +151,14 @@
   {}   % 1side
   % (\textwidth+10mm,.1mm)
 }
-\pagestyle{buwthesisheadings}
+\pagestyle{thesisheadings}
 
 %% startvskip: space before chapter title (should be fix; default: see scrboock.cls)
 %% endvskip: space after chapter title (should be variable or glue; default: see scrboock.cls)
 \renewcommand*{\chapterheadstartvskip}{\vspace*{.5\baselineskip}}
 \renewcommand*{\chapterheadendvskip}{\vspace{2.5\baselineskip}}
 
-\PackageInfo{uhull_dcs_thesis}{%
+\PackageInfo{\filename}{%
             \string\chapterheadstartvskip\space=\space\chapterheadstartvskip\MessageBreak
   \space\space\string\chapterheadendvskip\space=\space\chapterheadendvskip\MessageBreak
 }
@@ -231,9 +233,7 @@
       \cleardoublepage
       \thispagestyle{empty}
     }{}
-
     \vspace*{6ex}
-
     \begin{flushright}
       \noindent
       \begin{minipage}[t]{.875\textwidth}
@@ -265,22 +265,24 @@
       \begin{minipage}[b]{.875\textwidth}
         \begin{flushleft}
           {%
-            \sffamily\large
-            A \@thesis\ submitted in conformity with\\
-            the requirements for the degree of \@degree
+            \sffamily
+            A \@thesis\ submitted in partial conformity with\\
+            the requirements for the degree of \@degree\\
+            in \@profession
             \par
           }
           \vspace*{5ex}
           {%
-            \sffamily\large
-            University of Hull\\
+            \sffamily
+            The University of Hull\\
+            Faculty of Science and Engineering\\
             Department of Computer Science
             \par
           }
           \ifthenelse{\not\equal{@publishers}{}}{%
             \vspace*{5ex} 
             {%
-              \sffamily\large
+              \sffamily
               \@publishers
               \par
             }
@@ -327,6 +329,55 @@
 
 \newboolean{cropmarks}
 \setboolean{cropmarks}{false}
+
+\ifthenelse{\not\boolean{@internalreview}}{%
+  \date{}
+}{}
+
+\ifthenelse{\boolean{@printmode}}{%
+  \extratitle{%
+    \ifthenelse{\boolean{cropmarks}}{%
+      {%
+        \crop[axes,cross]
+        \mbox{}
+        \clearpage
+        \thispagestyle{empty}
+        \cleardoublepage
+        \thispagestyle{empty}
+      }%
+    }
+    \noindent
+    \vspace*{2.3\baselineskip}
+    \begin{flushright}
+      \begin{minipage}[t]{.875\textwidth}
+        \begin{flushleft}
+          \leavevmode
+          \sffamily\bfseries\huge\@title
+        \end{flushleft}
+      \end{minipage}
+    \end{flushright}
+  }
+}{}
+
+\newcommand{\thesiscopyright}{%
+  \begin{center}
+    \sffamily\small
+    \textcopyright\hspace*{.4em}\oldstylenums{2014}\hspace*{.5em}\@author. All rights reserved.
+  \end{center}
+}
+
+\lowertitleback{%
+  \thesiscopyright
+}
+
+\ifthenelse{\not\boolean{@printmode}}{%
+  \dedication{%
+    \vspace*{.875\textheight}
+    \thesiscopyright
+  }
+}{}
+
+\KOMAoptions{DIV=last}
 
 \endinput
 

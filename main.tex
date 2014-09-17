@@ -3,62 +3,16 @@
 \documentclass[
 % internalreview,
 % draft,
-% print,
-online,
+print,
+% online,
 ]{uhull_dcs_thesis}
 
 \input{support/biblatex}
 \usepackage{lettrine}
+\usepackage{showframe}
 
-\title{THE TITLE}
-\author{THE AUTHOR}
-
-\ifthenelse{\not\boolean{@internalreview}}{%
-  \date{}
-}{}
-
-\ifthenelse{\boolean{@printmode}}{%
-  \extratitle{%
-    \ifthenelse{\boolean{cropmarks}}{%
-      {%
-        \crop[axes,cross]
-        \mbox{}
-        \clearpage
-        \thispagestyle{empty}
-        \cleardoublepage
-        \thispagestyle{empty}
-      }%
-    }
-    \noindent
-    \vspace*{2.3\baselineskip}
-    \begin{flushright}
-      \begin{minipage}[t]{.875\textwidth}
-        \begin{flushleft}
-          \leavevmode
-          \sffamily\bfseries\huge\@title
-        \end{flushleft}
-      \end{minipage}
-    \end{flushright}
-  }
-}{}
-
-\newcommand{\thesiscopyright}{%
-  \begin{center}
-    \sffamily\small
-    \textcopyright\hspace*{.4em}\oldstylenums{2014}\hspace*{.5em}\@author. All rights reserved.
-  \end{center}
-}
-
-\lowertitleback{%
-  \thesiscopyright
-}
-
-\ifthenelse{\not\boolean{@printmode}}{%
-  \dedication{%
-    \vspace*{.875\textheight}
-    \thesiscopyright
-  }
-}{}
+\title{{\em THE TITLE}}
+\author{{\em THE AUTHOR}}
 
 \begin{document}
 
@@ -85,6 +39,10 @@ online,
 \input{chapter/contribution}
 \input{chapter/discussion}
 \input{chapter/conclusions}
+
+\appendix
+
+\input{appendix/considerations}
 
 \backmatter
 
