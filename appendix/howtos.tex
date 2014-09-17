@@ -1,0 +1,80 @@
+%% -*- Mode:LaTeX -*-
+
+\chapter{How to \ldots}
+\label{app:how-to}
+
+\section{Citations}
+\label{app:how-to:citations}
+
+Single author:
+\begin{itemize}
+\item \verb!\autocite{Nicodemus:DREOS:1965}!: \autocite{Nicodemus:DREOS:1965}
+\item \verb!\citetitle{Nicodemus:DREOS:1965}!: \citetitle{Nicodemus:DREOS:1965}
+\item \verb!\citeauthor{Nicodemus:DREOS:1965}!: \citeauthor{Nicodemus:DREOS:1965}
+\item \verb!\citeyear{Nicodemus:DREOS:1965}!: \citeyear{Nicodemus:DREOS:1965}
+\end{itemize}
+Multiple authors:
+\begin{itemize}
+\item \verb!\autocite{Sutherland:CTHSA:1974}!: \autocite{Sutherland:CTHSA:1974}
+\item \verb!\citetitle{Sutherland:CTHSA:1974}!: \citetitle{Sutherland:CTHSA:1974}
+\item \verb!\citeauthor{Sutherland:CTHSA:1974}!: \citeauthor{Sutherland:CTHSA:1974}
+\item \verb!\citeyear{Sutherland:CTHSA:1974}!: \citeyear{Sutherland:CTHSA:1974}
+\end{itemize}
+\par
+
+\section{Figures}
+\label{app:how-to:figures}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\linewidth]{figures/empty_lscape}
+  \caption[A single landscape figure]{A single landscape figure.}
+  \label{fig:how-to:figures:lscape}
+\end{figure}
+Figure~\ref{fig:how-to:figures:lscape} contains a single image in landscape format scaled to 75\% of
+the current line width.
+\par
+
+\begin{figure}
+  \centering
+  \subfloat[][]{%
+    \includegraphics[width=0.375\linewidth]{figures/empty_portrait}
+    \label{fig:how-to:figures:portait:a}
+  }
+  \subfloat[][]{%
+    \includegraphics[width=0.375\linewidth]{figures/empty_portrait}
+    \label{fig:how-to:figures:portait:b}
+  }
+  \caption[A single portrait figure]{A single figure containing sub-figures
+    (\protect\subref{fig:how-to:figures:portait:a} and
+    \protect\subref{fig:how-to:figures:portait:b})\@.}
+  \label{fig:how-to:figures:portait}
+\end{figure}
+Figures~\ref{fig:how-to:figures:portait:a} and \ref{fig:how-to:figures:portait:b} are sub-figures
+withing figure~\ref{fig:how-to:figures:portait} but can be individually referred
+to. Figures~\ref{fig:how-to:figures:portait:a} and \ref{fig:how-to:figures:portait:b} are both
+scaled to 37.5\% of the current line width.
+\par
+
+\section{Tables}
+\label{app:how-to:tables}
+
+\begin{table}
+  \centering
+  \begin{tabular}{lcr}
+    \toprule
+    Left   & Middle & Right\\
+    \midrule
+    \ldots & \ldots & \ldots \\
+    \bottomrule
+  \end{tabular}
+  \caption{A table caption.}
+  \label{tab:how-to:tables:example}
+\end{table}
+\ldots
+\par
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

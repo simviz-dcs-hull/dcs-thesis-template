@@ -1,9 +1,11 @@
 %% -*- Mode:LaTeX -*-
 
 \ifthenelse{\boolean{@draftmode}}{%
-  \nocite{Unknown:NotFound}
+  \nocite{*}
 }{}
 
+%% \setlength{\bibhang}{0.5em}
+\setlength{\bibparsep}{1ex}
 \printbibliography[heading=bibintoc]
 
 %%% Local Variables:
