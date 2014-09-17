@@ -1,6 +1,6 @@
-===============
-dcs08961 README
-===============
+==========================
+dcs-thesis-template README
+==========================
 
 :Author: Jan P Springer <regnirpsj@gmail.com>
 
@@ -11,7 +11,7 @@ dcs08961 README
 Introduction
 ============
 
-``thesis-template`` provides `LaTeX`_-based template(s) for writing a BSc/MSc/MPhil/PhD disserations/theses at the Department of Computer Science, University of Hull.
+``dcs-thesis-template`` provides `LaTeX`_-based template(s) for writing a BSc/MSc/MPhil/PhD disserations/theses at the Department of Computer Science, University of Hull.
 
 Building and Installation
 =========================
