@@ -1,0 +1,146 @@
+%%% -*- Mode:LaTeX -*-
+
+\usepackage{csquotes}
+\usepackage[%
+backend=bibtex8,
+bibstyle=authoryear,
+citestyle=authoryear,
+citetracker=true,
+dashed=false,
+date=iso8601,
+hyperref=true,
+maxbibnames=99,
+maxcitenames=1,
+sortcites=false,
+sorting=anyvt,
+]{biblatex}
+
+%% \textcite{} and et al.
+%% [http://tex.stackexchange.com/questions/48846/]
+%% \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
+
+%% use "[...]" citation by default
+%% [http://tex.stackexchange.com/questions/16765]
+\makeatletter
+\newrobustcmd*{\parentexttrack}[1]{%
+  \begingroup
+  \blx@blxinit
+  \blx@setsfcodes
+  \blx@bibopenparen#1\blx@bibcloseparen
+  \endgroup
+}
+\AtEveryCite{%
+  \let\parentext=\parentexttrack%
+  \let\bibopenparen=\bibopenbracket%
+  \let\bibcloseparen=\bibclosebracket%
+  \let\bibleftparen=\bibopenbracket%
+  \let\bibrightparen=\bibclosebracket%
+}
+\makeatother
+
+%% hyperlink author+year (not just year)
+%% [http://groups.google.com/forum/#!topic/comp.text.tex/rSPhG2jd3Ks]
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{citeyear}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\footcite}[\mkbibfootnote]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}%
+   \multicitedelim}
+  {\iffieldundef{postnote}
+     {\ifbool{cbx:parens}
+        {\bibcloseparen}
+        {}}
+     {\ifbool{cbx:parens}
+        {\postnotedelim}
+        {\addspace\bibopenparen}%
+      \printfield{postnote}\bibcloseparen}}
+     
+\DeclareCiteCommand{\citeauthor}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\indexnames{labelname}%
+   \printtext[bibhyperref]{\printnames{labelname}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+ 
+\DeclareCiteCommand{\citeyear}
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\printtext[bibhyperref]{\printfield{year}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+ 
+\renewbibmacro*{cite:label}{%
+  \iffieldundef{label}
+    {\printfield[citetitle]{labeltitle}}
+    {\printfield{label}}}
+
+\renewbibmacro*{cite:year+labelyear}{%
+  \iffieldundef{year}
+    {}
+    {\printfield{year}%
+     \printfield{labelyear}}}
+
+\renewbibmacro*{cite:shorthand}{%
+  \printfield{shorthand}}
+
+%% [http://tex.stackexchange.com/questions/98203]
+\IfFileExists{./local.bib}{\addbibresource{./local.bib}}{}
+
+%% [http://tex.stackexchange.com/questions/329]
+%% \renewcommand*{\bibfont}{\footnotesize}
+
+%% [http://tex.stackexchange.com/questions/58636]
+\renewcommand*{\mkbibacro}[1]{#1}
+
+%% [http://tex.stackexchange.com/questions/12806/]
+\DeclareNameAlias{sortname}{first-last}
+
+%% [http://tex.stackexchange.com/questions/6953/]
+%% this will also 'overwrite' the font size in '\copyrightbox{...}{\tiny\autocite{...}}'
+\appto{\citesetup}{\color{black}\hypersetup{linkcolor=href:linkcolor}}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

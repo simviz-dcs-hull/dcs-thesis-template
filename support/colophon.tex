@@ -1,0 +1,133 @@
+%% -*- Mode:LaTeX -*-
+
+\def\value#1{\expandafter\number\csname #1\endcsname}
+\def\tocount#1#2{#1=#2\divide #1 by 65536}
+
+\newcount\fsize
+\ifthenelse{\boolean{@printmode}}{%
+  \fsize=10
+}{%
+  \fsize=12
+}
+
+\newcount\lskip
+\tocount\lskip\baselineskip
+
+\newcount\twidth
+\tocount\twidth\textwidth
+\divide\twidth by 12
+
+\chapter*{Colophon}
+\chaptermark{Colophon}
+\label{ch:colophon}
+\ifthenelse{\boolean{@internalreview}}{%
+  \addcontentsline{toc}{chapter}{Colophon}
+}{}
+
+\lettrine{T}{his document} was created with the \LaTeX\ typesetting system using the
+\texttt{uhull\_dcs\_thesis} class based on {\KOMAScript}/scrbook. The body text is set
+\value{fsize}/\value{lskip}\,pt on a \value{twidth}\,pc measure with the \textsc{Latin\,Modern} font
+family.
+\ifthenelse{\boolean{@printmode}}{}{%
+  This is the online version intended for reading on a computer screen. The layout nominally uses a
+  one-sided A4 paper sheet, if printing is desired.
+}
+\par
+
+\ifthenelse{\boolean{@draftmode}\and\boolean{@internalreview}}{%
+  \newcommand{\FONTSAMPLE}{ABCD abcd XYZ xyz 0123456789 .?!}
+  \noindent\paragraph{Font Sizes:}
+  \begin{labeling}[:]{footnotm}
+  \item[Huge]     {\Huge         \FONTSAMPLE}
+  \item[huge]     {\huge         \FONTSAMPLE}
+  \item[LARGE]    {\LARGE        \FONTSAMPLE}
+  \item[Large]    {\Large        \FONTSAMPLE}
+  \item[large]    {\large        \FONTSAMPLE}
+  \item[normal]   {\normalsize   \FONTSAMPLE}
+  \item[small]    {\small        \FONTSAMPLE}
+  \item[footnote] {\footnotesize \FONTSAMPLE}
+  \item[script]   {\scriptsize   \FONTSAMPLE}
+  \item[tiny]     {\tiny         \FONTSAMPLE}
+  \end{labeling}
+  \par
+ 
+  \noindent\paragraph{Units:}
+  \HZ{60}, \PERSEC{75.8}, \SEC{1}, \MSEC{1000}, \USEC{1,000,000}, \NSEC{1,000,000,000}, \MBIS{1000},
+  \MBYS{125}, \GBIS{16}, \GBYS{2}, \RESI{1280}{1204} pixels, \RESI{8192}{8192} pixels or
+  \RESIS{8192}, \RESV{1024}{1024}{1024} or \RESVS{1024} voxels.
+  \par
+  
+  \noindent\paragraph{Page Layout:}
+  The page layout used in this document is shown in figure~\ref{fig:colophon:page+layout}\@.
+  \begin{figure}[!ht]
+    \captionsetup{singlelinecheck=0}
+    % \centering
+    \printheadingsfalse
+    \ifthenelse{\boolean{@printmode}}{%
+      \setlayoutscale{.3}
+      \vspace*{4\baselineskip}
+      \subfloat[][Odd page.]{%
+        \up{%
+          \parbox[t]{.5\textwidth}{%
+            \currentpage
+            \oddpagelayouttrue
+            \pagedesign
+          }
+        }
+      }\\
+      \vspace*{4\baselineskip}
+      \subfloat[][Even page.]{%
+        \up{%
+          \parbox[t]{.5\textwidth}{%
+            \currentpage
+            \oddpagelayoutfalse
+            \pagedesign
+          }
+        }
+      }
+    }{%
+      \setlayoutscale{.6}
+      \currentpage
+      \pagedesign
+    }
+    \caption[]{Document page layout.}
+    \label{fig:colophon:page+layout}
+  \end{figure}
+  \par
+  
+  \twocolumn
+  \newcommand{\PARATEXT}{; At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+    praesentium voluptatum eleniti atque corrupti quos dolores et quas molestias excepturi sint
+    \ldots\par}
+  \lettrine{A}{lfa}\PARATEXT
+  \lettrine{B}{ravo}\PARATEXT
+  \lettrine{C}{harlie}\PARATEXT
+  \lettrine{D}{elta}\PARATEXT
+  \lettrine{E}{cho}\PARATEXT
+  \lettrine{F}{oxtrott}\PARATEXT
+  \lettrine{G}{olf}\PARATEXT
+  \lettrine{H}{otel}\PARATEXT
+  \lettrine{I}{ndia}\PARATEXT
+  \lettrine[loversize=-.12,lraise=.15]{J}{uliet}\PARATEXT
+  \lettrine{K}{ilo}\PARATEXT
+  \lettrine{L}{ima}\PARATEXT
+  \lettrine{M}{ike}\PARATEXT
+  \lettrine{N}{ovember}\PARATEXT
+  \lettrine{O}{scar}\PARATEXT
+  \lettrine{P}{apa}\PARATEXT
+  \lettrine[loversize=-.12,lraise=.15]{Q}{uebec}\PARATEXT
+  \lettrine{R}{omeo}\PARATEXT
+  \lettrine{S}{ierra}\PARATEXT
+  \lettrine{T}{ango}\PARATEXT
+  \lettrine{U}{niform}\PARATEXT
+  \lettrine{V}{ictor}\PARATEXT
+  \lettrine{W}{hiskey}\PARATEXT
+  \lettrine{X}{ray}\PARATEXT
+  \lettrine{Y}{ankee}\PARATEXT
+  \lettrine{Z}{ulu}\PARATEXT
+}{}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

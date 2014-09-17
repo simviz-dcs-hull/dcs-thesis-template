@@ -1,0 +1,99 @@
+%% -*- Mode:LaTeX -*-
+
+\documentclass[
+% internalreview,
+% draft,
+% print,
+online,
+]{uhull_dcs_thesis}
+
+\input{support/biblatex}
+\usepackage{lettrine}
+
+\title{THE TITLE}
+\author{THE AUTHOR}
+
+\ifthenelse{\not\boolean{@internalreview}}{%
+  \date{}
+}{}
+
+\ifthenelse{\boolean{@printmode}}{%
+  \extratitle{%
+    \ifthenelse{\boolean{cropmarks}}{%
+      {%
+        \crop[axes,cross]
+        \mbox{}
+        \clearpage
+        \thispagestyle{empty}
+        \cleardoublepage
+        \thispagestyle{empty}
+      }%
+    }
+    \noindent
+    \vspace*{2.3\baselineskip}
+    \begin{flushright}
+      \begin{minipage}[t]{.875\textwidth}
+        \begin{flushleft}
+          \leavevmode
+          \sffamily\bfseries\huge\@title
+        \end{flushleft}
+      \end{minipage}
+    \end{flushright}
+  }
+}{}
+
+\newcommand{\thesiscopyright}{%
+  \begin{center}
+    \sffamily\small
+    \textcopyright\hspace*{.4em}\oldstylenums{2014}\hspace*{.5em}\@author. All rights reserved.
+  \end{center}
+}
+
+\lowertitleback{%
+  \thesiscopyright
+}
+
+\ifthenelse{\not\boolean{@printmode}}{%
+  \dedication{%
+    \vspace*{.875\textheight}
+    \thesiscopyright
+  }
+}{}
+
+\begin{document}
+
+\frontmatter
+
+\begin{spacing}{1}
+  \maketitle
+  \input{chapter/abstract}
+  % \input{acknowledgments}
+  \tableofcontents
+  \ifthenelse{\boolean{@draftmode}}{%
+    \listoffigures
+    \listoftables
+    % \renewcommand{\lstlistlistingname}{List of Listings}
+    % \lstlistoflistings
+    % \input{abbrevations}
+  }{}
+\end{spacing}
+
+\mainmatter
+
+\input{chapter/introduction}
+\input{chapter/background}
+\input{chapter/contribution}
+\input{chapter/discussion}
+\input{chapter/conclusions}
+
+\backmatter
+
+\begin{spacing}{1}
+  \input{support/references}
+  % \input{cv}
+  % \input{declaration}
+  % \input{test_prints}
+  % \input{support/colophon}
+\end{spacing}
+
+\end{document}
