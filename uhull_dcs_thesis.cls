@@ -453,7 +453,6 @@
   }
   \ifthenelse{\boolean{@printmode}}{%
     \hypersetup{%
-      colorlinks=false,
       citecolor=,
       urlcolor=,
     }
