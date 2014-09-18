@@ -19,7 +19,18 @@ Building and Installation
 Quick Setup
 -----------
 
-[to be written]
+::
+
+ # linux (pdflatex)
+ $> pdflatex main; bibtex main; pdflatex main
+ $> evince main.pdf
+
+ # linux (xelatex)
+ $> xelatex main; bibtex main; xelatex main
+ $> evince main.pdf
+
+ # windows
+ [ open main.tex in your preferred TeX-IDE and create a .pdf ]
 
 Overview
 --------
