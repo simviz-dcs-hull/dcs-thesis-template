@@ -457,8 +457,9 @@
       citecolor=,
       urlcolor=,
     }
-  }
+  }{}
   \ifxetex
+  \typeout{^^J\filename:No tinkering with PDF setup in xetex mode^^J}%
   \else
   \pdfcompresslevel=9
   \ifthenelse{\pdftexversion>121}{%
