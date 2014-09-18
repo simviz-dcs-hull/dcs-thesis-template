@@ -1,29 +1,36 @@
 %% -*- Mode:LaTeX -*-
 
+\setcounter{errorcontextlines}{4}
+
 \def\fileversion{v0.9}
 \def\filedate{2014/09/17}
 \def\filename{uhull_dcs_thesis}
 
 \ProvidesClass{\filename}[\filedate\space\fileversion\space dcs.uhull.ac.uk thesis class]
 
-\newcommand\@degree{{\ttfamily\bfseries DEGREE}}
+\newcommand\@degreeshort{{\ttfamily\bfseries DEGREE}}
+\newcommand\@degreelong{{\ttfamily\bfseries DEGREE}}
 \newcommand\@thesis{{\ttfamily\bfseries THESIS}}
 \newcommand\@profession{{\ttfamily\bfseries PROFESSION}}
 
 \DeclareOption{phd}{%
-  \renewcommand{\@degree}{{Doctor of Philosophy}}
+  \renewcommand{\@degreeshort}{PhD}
+  \renewcommand{\@degreelong}{{Doctor of Philosophy}}
   \renewcommand{\@thesis}{{thesis}}
 }
 \DeclareOption{mphil}{%
-  \renewcommand{\@degree}{{Master of Philosophy}}
+  \renewcommand{\@degreeshort}{MPhil}
+  \renewcommand{\@degreelong}{{Master of Philosophy}}
   \renewcommand{\@thesis}{{thesis}}
 }
 \DeclareOption{msc}{%
-  \renewcommand{\@degree}{{Master of Science}}
+  \renewcommand{\@degreeshort}{MSc}
+  \renewcommand{\@degreelong}{{Master of Science}}
   \renewcommand{\@thesis}{{dissertation}}
 }
 \DeclareOption{bsc}{%
-  \renewcommand{\@degree}{{Bachelor of Science}}
+  \renewcommand{\@degreeshort}{BSc}
+  \renewcommand{\@degreelong}{{Bachelor of Science}}
   \renewcommand{\@thesis}{{dissertation}}
 }
 \DeclareOption{ceng}{%
@@ -38,6 +45,29 @@
 }
 \DeclareOption{notitlepage}{%
   \ClassError{\filename}{Option 'notitlepage' not supported for \filename.}{}
+}
+
+\newcommand\@supervisorone{{\ttfamily\bfseries SUPERVISOR}}
+\newcommand\@supervisortwo{{\ttfamily\bfseries 2ND EXAMINER}}
+\newcommand\@supervisorext{{\ttfamily\bfseries EXTERNAL}}
+\newcommand\@supervisorchair{{\ttfamily\bfseries CHAIR}}
+
+\newcommand{\supervisor}[2][1st]{%
+  \ifthenelse{\equal{#1}{1st}}  {%
+    \renewcommand{\@supervisorone}{#2}
+  }{%
+    \ifthenelse{\equal{#1}{2nd}}{%
+      \renewcommand{\@supervisortwo}{#2}
+    }{%
+      \ifthenelse{\equal{#1}{ext}}{%
+        \renewcommand{\@supervisorext}{#2}
+      }{%
+        \ifthenelse{\equal{#1}{chair}}{%
+          \renewcommand{\@supervisorchair}{#2}
+        }
+      }
+    }
+  }
 }
 
 %% internal review
@@ -69,7 +99,7 @@
   \@printmodetrue
   \PassOptionsToClass{%
     11pt,
-    BCOR=10mm,
+    BCOR=5mm,
     DIV=calc,
     a4paper,
     twoside,
@@ -100,15 +130,34 @@
 }{scrbook}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
-\ExecuteOptions{bsc,csci}
+\ExecuteOptions{draft,online,bsc,csci}
 \ProcessOptions
 \LoadClass{scrbook}
 
+\RequirePackage{ifxetex}
+
+\ifxetex
+  \RequirePackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  \RequirePackage{polyglossia}
+  \setmainlanguage[variant=usmax]{english}
+\else
+  \RequirePackage[OT2,T1]{fontenc}
+  \RequirePackage[latin1]{inputenc}
+  \RequirePackage[USenglish]{babel}
+  \RequirePackage[yyyymmdd]{datetime}
+\fi
+
 \RequirePackage{calc}
-\RequirePackage{ifthen}
-\RequirePackage{lmodern}
+\RequirePackage{checkend}
+\RequirePackage{enumitem}
+\RequirePackage{etex}
+\RequirePackage{etoolbox}
+\RequirePackage{graphicx}
+\RequirePackage{rotating}
 \RequirePackage{scrpage2}
 \RequirePackage{setspace}
+\RequirePackage{xifthen}
 
 \ifthenelse{\boolean{@draftmode}}{%
   %% create 1.5\baselineskip
@@ -138,7 +187,7 @@
 \renewcommand{\pnumfont}{\normalfont\sffamily}
 
 %% headings/footings
-\defpagestyle{thesisheadings}{%
+\defpagestyle{uhulldcsthesisheadings}{%
   % header
   % (\textwidth+10mm,.1mm)
   {\pagemark\hfill\headmark}{\headmark\hfill\pagemark} % 2side, {l}{r}
@@ -151,7 +200,7 @@
   {}   % 1side
   % (\textwidth+10mm,.1mm)
 }
-\pagestyle{thesisheadings}
+\pagestyle{uhulldcsthesisheadings}
 
 %% startvskip: space before chapter title (should be fix; default: see scrboock.cls)
 %% endvskip: space after chapter title (should be variable or glue; default: see scrboock.cls)
@@ -233,66 +282,55 @@
       \cleardoublepage
       \thispagestyle{empty}
     }{}
-    \vspace*{6ex}
-    \begin{flushright}
-      \noindent
-      \begin{minipage}[t]{.875\textwidth}
-        \begin{flushleft}
-          {%
-            \sffamily\bfseries\huge
-            \@title
-            \par
-          }
-          \vspace*{5ex}
-          {%
-            \sffamily\Large
-            by \@author
-            \par
-          }
-          \vspace*{5ex}
-          {%
-            \sffamily\large
-            \@date
-            \par
-          }
-        \end{flushleft}
-      \end{minipage}
-    \end{flushright}
-    \par
-    \vfill
-    \begin{flushright}
-      \noindent
-      \begin{minipage}[b]{.875\textwidth}
-        \begin{flushleft}
-          {%
-            \sffamily
-            A \@thesis\ submitted in partial conformity with\\
-            the requirements for the degree of \@degree\\
-            in \@profession
-            \par
-          }
-          \vspace*{5ex}
-          {%
-            \sffamily
-            The University of Hull\\
-            Faculty of Science and Engineering\\
-            Department of Computer Science
-            \par
-          }
-          \ifthenelse{\not\equal{@publishers}{}}{%
-            \vspace*{5ex} 
-            {%
-              \sffamily
-              \@publishers
-              \par
+
+    \begin{tabular}{lcr}
+      {%
+        \begin{minipage}[b][0.985\textheight]{0.11\textwidth}
+          \includegraphics[trim=18 19 20 18,clip,draft=false,angle=90,width=0.61\textwidth]
+          {figures/uhull_logo_black}
+          \hfill
+          \begin{sideways}
+            \sffamily\small\,Department of Computer Science
+          \end{sideways}
+        \end{minipage}
+      } &
+      \hspace{0.9em} &
+      {%
+        \begin{minipage}[b][0.983\textheight]{0.72\textwidth}
+          \vspace{6ex}
+          \noindent
+          \begin{flushleft}
+            {\sffamily\bfseries\huge\@title}\par
+            \vspace{5ex}
+            {\sffamily\Large\ by\ \@author}\par
+            \vspace{5ex}
+            {\sffamily\large\@date}\par
+            \vfill
+            {\sffamily
+              A \@thesis\ submitted in partial conformity with the requirements for the degree of
+              \@degreelong\ (\@degreeshort)\\
+              in \@profession}\par
+            \vspace{5ex plus 1ex minus 2ex}
+            {\sffamily
+              \begin{tabular}{rl}
+                Supervisor:                     & \@supervisorone\\
+                2\textsuperscript{nd} Examiner: & \@supervisortwo\\
+                \ifthenelse{\equal{\@degreeshort}{PhD}}{%
+                  External Examiner:            & \@supervisorext\\
+                }{}
+                \ifthenelse{\equal{\@degreeshort}{MPhil}\or\equal{\@degreeshort}{PhD}}{%
+                  Panel Chair:                  & \@supervisorchair\\
+                }{}
+              \end{tabular}
             }
-          }{}
-        \end{flushleft}
-      \end{minipage}
-    \end{flushright}
+            \vspace{1pt plus 0pt minus 1pt}
+          \end{flushleft}
+        \end{minipage}
+      }
+    \end{tabular}
     
     \@thanks
-    
+
     \ifthenelse{\boolean{@twoside}}{%
       \clearpage
       \thispagestyle{empty}
@@ -307,16 +345,11 @@
         \@lowertitleback
       \end{minipage}
     }{}
-
     \ifthenelse{\not\equal{@dedication}{}}{%
       \clearpage
       \thispagestyle{empty}
       \vfill
-      {%
-        \sffamily\large
-        \@dedication
-        \par
-      }
+      {\sffamily\large\@dedication}\par
       \ifthenelse{\boolean{@twoside}}{%
         \clearpage
         \thispagestyle{empty}
@@ -366,18 +399,95 @@
   \end{center}
 }
 
-\lowertitleback{%
-  \thesiscopyright
+\newcommand{\enablemicrotyping}{%
+  \ifxetex
+  \typeout{^^J\filename:Not using package 'microtype' in xetex mode^^J}%
+  \else
+  \RequirePackage{microtype}
+  \microtypesetup{%
+    final,
+    activate={true,nocompatibility},
+    kerning=true,
+    spacing=true,
+    tracking=true,
+    factor=1100,
+    stretch=10,
+    shrink=10,
+    verbose=errors,
+  }
+  \microtypecontext{%
+    spacing=nonfrench,
+  }
+  \ifthenelse{\pdftexversion>130}{%
+    \DisableLigatures{encoding=T1,family=tt*}
+  }{}
+  \fi
 }
 
-\ifthenelse{\not\boolean{@printmode}}{%
-  \dedication{%
-    \vspace*{.875\textheight}
+\newcommand{\setuphyperref}{%
+  \RequirePackage{hyperref}
+  \RequirePackage{xcolor}
+  \definecolor{href:citecolor}{rgb}{.002,.002,.56}
+  \definecolor{href:linkcolor}{rgb}{.002,.002,.56}
+  \hypersetup{%
+    breaklinks = true,
+    citecolor  = href:citecolor,
+    colorlinks = true,
+    draft      = false,
+    linkcolor  =,
+    linktoc    = all,
+    plainpages = false,
+    urlcolor   = href:linkcolor,
+    pdfauthor  = {\@author},
+    pdftitle   = {\@title},
+  }
+  \ifthenelse{\boolean{@draftmode}}{%
+    \hypersetup{%
+      pdfsubject = {\@degreeshort\ \@thesis\ draft, Department of Computer Science, University of
+        Hull},
+    }
+  }{%
+     \hypersetup{%
+      pdfsubject = {\@degreeshort\ \@thesis, Department of Computer Science, University of Hull},
+    }
+  }
+  \ifthenelse{\boolean{@printmode}}{%
+    \hypersetup{%
+      colorlinks=false,
+      citecolor=,
+      urlcolor=,
+    }
+  }
+  \ifxetex
+  \else
+  \pdfcompresslevel=9
+  \ifthenelse{\pdftexversion>121}{%
+    \pdfoptionpdfminorversion=5
+    \pdfimagehicolor=1
+  }{}
+  \ifthenelse{\pdftexversion>130}{%
+    \pdfobjcompresslevel=3
+  }{}
+  \pdfinfo{%
+    /GTS_PDFXVersion (PDF/X-3:2003)
+  }
+  \fi
+}
+
+\AtEndPreamble{%
+  \lowertitleback{%
     \thesiscopyright
   }
-}{}
-
-\KOMAoptions{DIV=last}
+  \ifthenelse{\not\boolean{@printmode}}{%
+    \dedication{%
+      \vspace*{.875\textheight}
+      \thesiscopyright
+    }
+  }{}
+  \setuphyperref
+  \KOMAoptions{DIV=last}
+  \enablemicrotyping
+}
 
 \endinput
 
