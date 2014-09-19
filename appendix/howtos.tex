@@ -3,6 +3,12 @@
 \chapter{How to \ldots}
 \label{app:how-to}
 
+\section{Write a Technical Text}
+\label{app:how-to:write+a+technical+text}
+
+\ldots
+\par
+
 \section{Citations}
 \label{app:how-to:citations}
 
@@ -27,22 +33,20 @@ Multiple authors:
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.75\linewidth]{figures/empty_lscape}
+  \includegraphics[draft=false,width=0.75\linewidth]{figures/empty_lscape}
   \caption[A single landscape figure]{A single landscape figure.}
   \label{fig:how-to:figures:lscape}
 \end{figure}
 Figure~\ref{fig:how-to:figures:lscape} contains a single image in landscape format scaled to 75\% of
 the current line width.
-\par
-
 \begin{figure}
   \centering
   \subfloat[][]{%
-    \includegraphics[width=0.375\linewidth]{figures/empty_portrait}
+    \includegraphics[draft=false,width=0.375\linewidth]{figures/empty_portrait}
     \label{fig:how-to:figures:portait:a}
   }
   \subfloat[][]{%
-    \includegraphics[width=0.375\linewidth]{figures/empty_portrait}
+    \includegraphics[draft=false,width=0.375\linewidth]{figures/empty_portrait}
     \label{fig:how-to:figures:portait:b}
   }
   \caption[A single portrait figure]{A single figure containing sub-figures
@@ -61,16 +65,45 @@ scaled to 37.5\% of the current line width.
 
 \begin{table}
   \centering
-  \begin{tabular}{lcr}
+  \sffamily
+  \begin{tabular}{lccr}
     \toprule
-    Left   & Middle & Right\\
+    Left aligned  & Centered & Centered & Right aligned\\
     \midrule
-    \ldots & \ldots & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots \\
     \bottomrule
   \end{tabular}
-  \caption{A table caption.}
-  \label{tab:how-to:tables:example}
+  \caption[A simple table]{A simple table.}
+  \label{tab:how-to:tables:example1}
 \end{table}
+\begin{table}
+  \centering
+  \sffamily
+  \rowcolors{2}{}{gray!10}
+  \begin{tabular}{lcccr}
+    \toprule
+    Left aligned  & Centered & Centered & Centered & Right aligned\\
+    \midrule
+    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
+    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
+    \bottomrule
+  \end{tabular}
+  \caption[Alternating row-color table]{A table with alternating row colors.}
+  \label{tab:how-to:tables:example2}
+\end{table}
+\ldots
+\par
+
+\section{Miscellaneous}
+\label{app:how-to:miscellaneous}
+
 \ldots
 \par
 

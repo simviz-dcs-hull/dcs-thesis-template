@@ -130,7 +130,7 @@
 }{scrbook}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrbook}}
-\ExecuteOptions{draft,online,bsc,csci}
+\ExecuteOptions{final,online,bsc,csci}
 \ProcessOptions
 \LoadClass{scrbook}
 
@@ -296,7 +296,7 @@
       } &
       \hspace{0.9em} &
       {%
-        \begin{minipage}[b][0.983\textheight]{0.72\textwidth}
+        \begin{minipage}[b][0.983\textheight]{0.71\textwidth}
           \vspace{6ex}
           \noindent
           \begin{flushleft}
@@ -424,6 +424,24 @@
   \fi
 }
 
+\newcommand{\setupcaptions}{%
+  \captionsetup{%
+    font={small,sf},
+    format=plain,
+    justification=raggedright,
+    labelfont=bf,
+    margin=1pt,
+    singlelinecheck=1,
+  }
+  \captionsetup*[subfloat]{%
+    font={footnotesize,sf},
+    format=hang,
+    labelsep=space,
+    margin=2pt,
+    singlelinecheck=0,
+  }
+}
+
 \newcommand{\setuphyperref}{%
   \RequirePackage{hyperref}
   \RequirePackage{xcolor}
@@ -484,6 +502,7 @@
       \thesiscopyright
     }
   }{}
+  \setupcaptions
   \setuphyperref
   \KOMAoptions{DIV=last}
   \enablemicrotyping
