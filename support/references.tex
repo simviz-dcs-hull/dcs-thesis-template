@@ -1,11 +1,22 @@
 %% -*- Mode:LaTeX -*-
 
+\chapterpreamble{0.75\textwidth}{Terry Pratchett, Guards! Guards!}{%
+  The three rules of the Librarians of Time and Space are:
+  \begin{enumerate}[noitemsep,wide]
+  \item Silence,
+  \item Books must be returned no later than the last date shown, and
+  \item Do not interfere with the nature of causality.
+  \end{enumerate}
+  \vspace{-\baselineskip}
+}
+
 \ifthenelse{\boolean{@draftmode}}{%
   \nocite{*}
 }{}
 
-%% \setlength{\bibhang}{0.5em}
+%\setlength{\bibhang}{1em}
 \setlength{\bibparsep}{1ex}
+\renewcommand{\bibfont}{\small}
 \printbibliography[heading=bibintoc]
 
 %%% Local Variables:
