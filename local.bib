@@ -4,6 +4,16 @@
          # " \providecommand{\germanquote}[1]{{{\glqq}#1{\grqq}}} "
          }
 
+@String{J:CACM = {Commun. ACM}}
+
+@InProceedings{Bergman:IRAR:1986,
+  author =       {Bergman, L. and Fuchs, H. and Grant, E. and Spach, S.},
+  title =        {{Image Rendering by Adaptive Refinement}},
+  crossref =     {Anonymous:SIGGRAPH:1986},
+  pages =        {29--37},
+  doi =          {10.1145/15922.15889},
+}
+
 @Book{Booth:CR:2008,
   author =       {Booth, W. C. and Colomb, G. G. and Williams, J. M.},
   title =        {{The Craft of Research}},
@@ -20,6 +30,14 @@
   publisher =    {Addison-Wesley},
   year =         {1975},
   note =         {\url{http://en.wikipedia.org/w/index.php?title=The_Mythical_Man-Month}},
+}
+
+@InProceedings{Kajiya:RE:1986,
+  author =       {Kajiya, J. T.},
+  title =        {{The Rendering Equation}},
+  crossref =     {Anonymous:SIGGRAPH:1986},
+  pages =        {143--150},
+  doi =          {10.1145/15922.15902},
 }
 
 @Article{Mandelbrot:FBMFNA:1968,
@@ -44,6 +62,17 @@
   doi =          {10.1364/AO.4.000767},
 }
 
+@Article{Phong:ICGP:1975,
+  author =       {Phong, B. T.},
+  title =        {{I}llumination for {C}omputer {G}enerated {P}ictures},
+  journal =      J:CACM,
+  year =         {1975},
+  volume =       {18},
+  number =       {6},
+  pages =        {311--317},
+  doi =          {10.1145/360825.360839},
+}
+
 @Article{Sutherland:CTHSA:1974,
   author =       {Sutherland, I. E. and Sproull, R. F. and Schumacker, R. A.},
   title =        {{A Characterization of Ten Hidden-Surface Algorithms}},
@@ -60,4 +89,26 @@
   title =        {{No Title}},
   year =         {2001},
   note =         {{\em Placeholder for reference not yet found!}},
+}
+
+@Article{Whitted:IIMSD:1980,
+  author =       {Whitted, T.},
+  title =        {{An Improved Illumination Model for Shaded Display}},
+  journal =      J:CACM,
+  year =         {1980},
+  volume =       {23},
+  number =       {6},
+  pages =        {343--349},
+  doi =          {10.1145/358876.358882},
+}
+
+%% cross-referenced proceedings/books/etc need to be at the end
+
+@Proceedings{Anonymous:SIGGRAPH:1986,
+  title =        {Computer Graphics (Proceedings of ACM SIGGRAPH 86)},
+  booktitle =    {Computer Graphics (Proceedings of ACM SIGGRAPH 86)},
+  year =         {1986},
+  volume =       {20},
+  number =       {4},
+  organization = {ACM},
 }
