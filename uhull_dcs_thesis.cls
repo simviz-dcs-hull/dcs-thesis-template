@@ -298,13 +298,12 @@
       {%
         \begin{minipage}[b][0.983\textheight]{0.71\textwidth}
           \vspace{6ex}
-          \noindent
           \begin{flushleft}
-            {\sffamily\bfseries\huge\@title}\par
+            {\sffamily\bfseries\huge\hspace{-.125em}\@title}\\
             \vspace{5ex}
-            {\sffamily\Large\ by\ \@author}\par
+            {\sffamily\Large by\ \@author}\\
             \vspace{5ex}
-            {\sffamily\large\@date}\par
+            {\sffamily\large\@date}
             \vfill
             {\sffamily
               A \@thesis\ submitted in partial conformity with the requirements for the degree of
@@ -394,8 +393,8 @@
 
 \newcommand{\thesiscopyright}{%
   \begin{center}
-    \sffamily\small
-    \textcopyright\hspace*{.4em}\oldstylenums{2014}\hspace*{.5em}\@author. All rights reserved.
+    \sffamily\small\textcopyright\hspace*{.4em}\oldstylenums{\the\year}\hspace*{.5em}\@author\@. All
+    rights reserved.
   \end{center}
 }
 
@@ -506,6 +505,20 @@
   \setuphyperref
   \KOMAoptions{DIV=last}
   \enablemicrotyping
+}
+
+% chapter preamples
+\renewcommand*{\dictumauthorformat}[1]{#1}
+\setkomafont{dictumauthor}{\slshape}
+
+\newcommand{\chapterpreamble}[3]{%
+  \renewcommand*{\dictumwidth}{#1}
+  \setchapterpreamble[u]{%
+    \begin{spacing}{1}
+      \dictum[#2]{{#3}}
+      \vspace{2\baselineskip}
+    \end{spacing}
+  }
 }
 
 \endinput
