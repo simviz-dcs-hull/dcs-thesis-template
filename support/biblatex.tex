@@ -3,6 +3,7 @@
 \usepackage{csquotes}
 \usepackage[%
 backend=bibtex8,
+%%backref=true,
 bibstyle=authoryear,
 citestyle=authoryear,
 citetracker=true,
@@ -15,11 +16,19 @@ sortcites=false,
 sorting=anyvt,
 ]{biblatex}
 
+%% [http://tex.stackexchange.com/questions/36307/]
+\DefineBibliographyStrings{english}{%
+  backrefpage  = {page}, % originally "cited on page"
+  backrefpages = {pages},% originally "cited on pages"
+}
+\usepackage{xpatch}
+\xpatchbibmacro{pageref}{parens}{brackets}{}{}
+
 %% \textcite{} and et al.
 %% [http://tex.stackexchange.com/questions/48846/]
 %% \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{99}}}
 
-%% use "[...]" citation by default
+%% use bracketed, i.e. "[...]", citation by default
 %% [http://tex.stackexchange.com/questions/16765]
 \makeatletter
 \newrobustcmd*{\parentexttrack}[1]{%
