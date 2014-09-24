@@ -1,0 +1,16 @@
+%%% -*- Mode:LaTeX -*-
+
+\lstdefinelanguage{c++11}[iso]{c++}{%
+  sensitive,
+  morekeywords=[1]{% keywords
+  constexpr,nullptr},
+  morekeywords=[2]{% stdlib
+  std,tr1},
+  moredelim=**[is][\only<+>{\color{red}}]{@}{@},
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+

@@ -1,0 +1,55 @@
+%%% -*- Mode:LaTeX -*-
+
+\lstdefinelanguage{cg}[ansi]{c}{%
+  sensitive=false,
+  morekeywords=[1]{% keywords
+    asm,asm_fragment,auto,bool,break,case,catch,char,class,column_major,compile,const,const_cast,
+    continue,decl,default,delete,discard,do,double,dword,dynamic_cast,else,emit,enum,explicit,
+    extern,false,fixed,float,float2,float3,float4,for,friend,get,goto,half,if,in,inline,inout,int,
+    interface,long,matrix,
+    mutable,namespace,new,operator,out,packed,pass,pixelfragment,pixelshader,private,protected,
+    public,register,reinterpret_cast,return,row_major,sampler,sampler_state,sampler1D,sampler2D,
+    sampler3D,samplerCUBE,shared,short,signed,sizeof,static,static_cast,string,struct,switch,
+    technique,template,texture,texture1D,texture2D,texture3D,textureCUBE,textureRECT,this,throw,
+    true,try,typedef,typeid,typename,uniform,union,unsigned,using,vector,vertexfragment,
+    vertexshader,virtual,void,volatile,while},
+  morekeywords=[2]{% stdlib
+    abs,acos,all,any,asin,atan,atan2,bitCount,bitfieldExtract,bitfieldInsert,bitfieldReverse,ceil,
+    clamp,clip,cos,cosh,cross,ddx,ddy,degrees,determinant,distance,dot,exp,exp2,faceforward,findLSB,
+    findMSB,floatToIntBits,floatToRawIntBits,floor,fmod,frac,frexp,fwidth,intBitsToFloat,inverse,
+    isfinite,isinf,isnan,ldexp,length,lerp,lit,log,log10,log2,max,min,modf,mul,normalize,pack,pow,
+    radians,reflect,refract,round,rsqrt,saturate,sign,sin,sincos,sinh,smoothstep,sqrt,step,tan,tanh,
+    tex1D,tex1DARRAY,tex1DARRAYbias,tex1DARRAYcmpbias,tex1DARRAYcmplod,tex1DARRAYfetch,
+    tex1DARRAYlod,tex1DARRAYproj,tex1DARRAYsize,tex1Dbias,tex1Dcmpbias,tex1Dcmplod,tex1Dfetch,
+    tex1Dlod,tex1Dproj,tex1Dsize,tex2D,tex2Dbias,tex2Dcmpbias,tex2Dcmplod,tex2Dfetch,tex2Dlod,
+    tex2Dproj,tex2Dsize,tex2DARRAY,tex2DARRAYbias,tex2DARRAYfetch,tex2DARRAYlod,tex2DARRAYproj,
+    tex2DARRAYsize,tex2DMSfetch,tex2DMSsize,tex2DMSARRAYfetch,tex2DMSARRAYsize,tex3D,tex3Dbias,
+    tex3Dfetch,tex3Dlod,tex3Dproj,tex3Dsize,texBUF,texBUFsize,texCUBE,texCUBEARRAY,texCUBEARRAYbias,
+    texCUBEARRAYlod,texCUBEARRAYsize,texCUBEbias,texCUBElod,texCUBEproj,texCUBEsize,texRBUF,
+    texRBUFsize,texRECT,texRECTbias,texRECTfetch,texRECTlod,texRECTproj,texRECTsize,transpose,trunc,
+    unpack},
+  morekeywords=[3]{% global state
+    COLOR,COLOR0,COLOR1,COLOR2,COLOR3,NORMAL,POSITION,TEXCOORD,TEXCOORD0,TEXCOORD1,TEXCOORD2},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morecomment=[s]{<}{>},
+}
+
+\lstdefinelanguage{cgfx}[ansi]{c}{%
+  sensitive,
+  morekeywords=[1]{%
+  },
+  morekeywords=[2]{%
+  },
+  morekeywords=[3]{%
+  },
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morecomment=[s]{<}{>},
+}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+

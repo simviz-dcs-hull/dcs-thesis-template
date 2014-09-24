@@ -81,8 +81,6 @@ scaled to 37.5\% of the current line width.
     \ldots & \ldots   & \ldots   & \ldots \\
     \ldots & \ldots   & \ldots   & \ldots \\
     \ldots & \ldots   & \ldots   & \ldots \\
-    \ldots & \ldots   & \ldots   & \ldots \\
-    \ldots & \ldots   & \ldots   & \ldots \\
     \bottomrule
   \end{tabular}
   \caption[A simple table]{A simple table.}
@@ -91,13 +89,13 @@ scaled to 37.5\% of the current line width.
 \begin{table}
   \centering
   \sffamily
-  \rowcolors{2}{}{gray!10}
+  \rowcolors{3}{gray!15}{}
   \begin{tabular}{lcccr}
     \toprule
-    Left aligned  & Centered & Centered & Centered & Right aligned\\
+    \mrow{2}{*}{Left aligned} & \mcol{2}{c}{Centered} & \mcol{2}{c}{Centered \& Right aligned} \\
+                                \cmidrule(lr){2-3}       \cmidrule(l){4-5}
+                              & A & B                 & C & D\\
     \midrule
-    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
-    \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
     \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
     \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
     \ldots & \ldots   & \ldots   & \ldots   & \ldots \\
@@ -106,7 +104,127 @@ scaled to 37.5\% of the current line width.
   \caption[Alternating row-color table]{A table with alternating row colors.}
   \label{tab:how-to:tables:example2}
 \end{table}
-\ldots
+\kant[42]
+\par
+
+\section{Source-Code Listings}
+\label{app:how-to:source+code+listings}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+  frame=single,
+}
+
+\begin{multicols}{2}
+\begin{lstlisting}[language=c++11,caption={A C++ source-code fragment, declaration},label={lst:how-to:source+code+listings:cpp+declaration}]
+#include <vector>
+
+class T {
+
+public:
+
+  void swap(T&);
+  T& operator=(T& const);
+
+private:
+
+  signed           v1_;
+  float[16]        v2_;
+  std::vector<int> v3_;
+
+};
+
+
+// "poor man's" vertical fill
+\end{lstlisting}
+\vfill
+\begin{lstlisting}[language=c++11,caption={A C++ source-code fragment, definition},label={lst:how-to:source+code+listings:cpp+definition}]
+#include <algortihm>
+
+void
+T::swap(T& a)
+{
+  std::swap       (v1_, a.v1_);
+  std::swap_ranges(v2_, a.v2_);
+  std::swap_ranges(v3_, a.v3_);
+}
+
+T&
+T::operator=(T& const rhs)
+{
+  T tmp(rhs);
+
+  swap(tmp);
+
+  return *this;
+}
+\end{lstlisting}
+\end{multicols}
+Note that listings \ref{lst:how-to:source+code+listings:cpp+declaration} and
+\ref{lst:how-to:source+code+listings:cpp+definition} are {\em paired} in a twocolumn setup, to allow
+easy comparison; see the \LaTeX\ source for how this is achieved.
+\par
+
+\begin{lstlisting}[language=glsl,caption={A GLSL source-code fragment}]
+#version 430 core
+
+in vec4 position;
+in vec4 normal;
+in vec2 tcoords;
+
+out vp_out_t {
+       vec3  position_wc;
+       vec3  normal_wc;
+       vec2  tcoords;
+  flat int   mtl_id;
+} vp_out;
+
+void
+main()
+{
+  // this 'drives' the rasterizer; p' = mvp * p
+  gl_Position         = xform_projection;
+  gl_Position        *= xform_view;
+  gl_Position        *= xform_model;
+  gl_Position        *= position;
+
+  // these will be interpolated and used in the fragment program
+  // note: position/normal stay in world coordinates!
+  vp_out.position_wc = (xform_model * position).xyz;
+  vp_out.normal_wc   = normalize(transpose(inverse(xform_model)) *
+                       normal).xyz;
+  vp_out.tcoords     = tcoords;
+  vp_out.mtl_id      = material_id;
+}
+\end{lstlisting}
+\begin{lstlisting}[language=hlsl,caption={A HLS source-code fragment}]
+/* uniform */ StructuredBuffer<light> light_list;
+/* uniform */ lambert_material        material;
+
+fp_output
+fp_main(fp_input input)
+{
+  fp_output result;
+
+  float4 ambient  = color_black;
+  float4 diffuse  = color_black;
+  float4 specular = color_black;
+
+  accumulate_lights(/* in */    light_list, input.position.xyz,
+                    /* in */    normalize(input.normal.xyz),
+                    /* in */    viewer_position.xyz,
+                    /* in */    material.shininess,
+                    /* inout */ ambient, diffuse, specular);
+
+  result.color    =            material.emission;
+  result.color   += ambient  * material.ambient;
+  result.color   += diffuse  * material.diffuse;
+  result.color   += specular * material.specular;
+  result.color.a  = material.diffuse.a;
+
+  return result;
+}
+\end{lstlisting}
 \par
 
 \section{Miscellaneous}

@@ -1,7 +1,10 @@
-%% -*- Mode:LaTeX -*-
+%%% -*- Mode:LaTeX -*-
+
+% make sure 'xcolor' is loaded with all the right^tm options
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 
 \documentclass[
-% internalreview,
+internalreview,
 % draft,
 % print,
 % online,
@@ -12,13 +15,20 @@
 ]{uhull_dcs_thesis}
 
 \input{support/biblatex}
+\input{support/listings}
+
 \usepackage{booktabs}
-\usepackage{lettrine}
 \usepackage{kantlipsum}
 \usepackage{lmodern}
+\usepackage{multicol}
+\usepackage{multirow}
 % \usepackage{showframe}
 \usepackage{subfig}
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
+
+% some convenience macros
+\newcommand{\mcol}[3]{\multicolumn{#1}{#2}{#3}}
+\newcommand{\mrow}[3]{\multirow{#1}{#2}{#3}}
 
 \title            {{\em THE TITLE}}
 \author           {{\em THE AUTHOR}}
@@ -36,11 +46,11 @@
   \input{chapter/abstract}
   % \input{acknowledgments}
   \tableofcontents
-  \ifthenelse{\boolean{@draftmode}}{%
+  \ifthenelse{\boolean{@draftmode}\or\boolean{@internalreview}}{%
     \listoffigures
     \listoftables
-    % \renewcommand{\lstlistlistingname}{List of Listings}
-    % \lstlistoflistings
+    \renewcommand{\lstlistlistingname}{List of Listings}
+    \lstlistoflistings
     % \input{abbrevations}
   }{}
 \end{spacing}
@@ -67,3 +77,8 @@
 \end{spacing}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
