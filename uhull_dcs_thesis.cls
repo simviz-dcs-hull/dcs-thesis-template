@@ -3,7 +3,7 @@
 \setcounter{errorcontextlines}{4}
 
 \def\fileversion{v0.9}
-\def\filedate{2014/09/17}
+\def\filedate{2015/02/24}
 \def\filename{uhull_dcs_thesis}
 
 \ProvidesClass{\filename}[\filedate\space\fileversion\space dcs.uhull.ac.uk thesis class]
@@ -287,7 +287,7 @@
       {%
         \begin{minipage}[b][0.985\textheight]{0.11\textwidth}
           \includegraphics[trim=18 19 20 18,clip,draft=false,angle=90,width=0.61\textwidth]
-          {figures/uhull_logo_black}
+          {figures/uhull_logo_black}%
           \hfill
           \begin{sideways}
             \sffamily\small\,Department of Computer Science
